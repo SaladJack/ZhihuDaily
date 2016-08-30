@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="light_menu_index_background">#dfdfdf</color>
+    <color name="light_menu_header">@android:color/holo_blue_dark</color>
+    <color name="dark_selector_drawable">#333333</color>
+    <color name="gray">#bebebe</color>
+    <color name="light_news_item">#f0f0f0</color>
+</resources>
