@@ -77,6 +77,8 @@ public class Kanner extends FrameLayout implements OnClickListener {
         ll_dot.removeAllViews();
 
         int len = topStoriesEntities.size();
+        if (len == 0)
+            return;
         for (int i = 0; i < len; i++) {
             ImageView iv_dot = new ImageView(context);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -94,7 +96,6 @@ public class Kanner extends FrameLayout implements OnClickListener {
             ImageView iv = (ImageView) fm.findViewById(R.id.iv_title);
             TextView tv_title = (TextView) fm.findViewById(R.id.tv_title);
             iv.setScaleType(ScaleType.CENTER_CROP);
-//            iv.setBackgroundResource(R.drawable.loading1);
             if (i == 0) {
                 Glide.with(iv.getContext())
                         .load(topStoriesEntities.get(len - 1).getImage())

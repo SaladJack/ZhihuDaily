@@ -9,4 +9,5 @@
     <color name="dark_selector_drawable">#333333</color>
     <color name="gray">#bebebe</color>
     <color name="light_news_item">#f0f0f0</color>
+    <color name="light_news_topic">#666666</color>
 </resources>

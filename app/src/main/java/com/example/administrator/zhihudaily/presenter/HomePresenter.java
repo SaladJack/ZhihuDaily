@@ -2,6 +2,7 @@ package com.example.administrator.zhihudaily.presenter;
 
 import com.example.administrator.zhihudaily.base.BasePresenter;
 import com.example.administrator.zhihudaily.inter.HomeViewInterface;
+import com.orhanobut.logger.Logger;
 
 import retrofit2.Retrofit;
 import rx.android.schedulers.AndroidSchedulers;
@@ -26,6 +27,7 @@ public class HomePresenter extends BasePresenter{
                 .subscribe(latestResult -> {
                     mHomeView.showTopStories(latestResult.getTop_stories());
                     mHomeView.showStroies(latestResult.getStories());
+                    Logger.d(latestResult.toString());
                 });
     }
 }

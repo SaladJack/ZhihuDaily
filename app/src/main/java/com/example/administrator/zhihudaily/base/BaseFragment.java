@@ -13,6 +13,7 @@ public abstract class BaseFragment extends Fragment {
     protected BaseActivity mActivity;
 
     protected abstract void initView(View view, Bundle savedInstanceState);
+    protected abstract void initData();
 
     //获取fragment布局文件ID
     protected abstract int getLayoutId();
@@ -44,6 +45,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutId(), container, false);
+        initData();
         initView(view, savedInstanceState);
         return view;
     }
