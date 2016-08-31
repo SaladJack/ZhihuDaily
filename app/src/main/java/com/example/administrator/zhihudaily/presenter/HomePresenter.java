@@ -25,9 +25,21 @@ public class HomePresenter extends BasePresenter{
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(latestResult -> {
+                    mHomeView.setDate(latestResult.getDate());
                     mHomeView.showTopStories(latestResult.getTop_stories());
                     mHomeView.showStroies(latestResult.getStories());
-                    Logger.d(latestResult.toString());
                 });
     }
+
+    public void fetchBeforeStories(String date){
+        zhihuService.getBeforeResult(date)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(beforeResult -> {
+                    mHomeView.showBefore(beforeResult.getStories());
+                    mHomeView.setDate(beforeResult.getDate());
+                });
+    }
+
+
 }

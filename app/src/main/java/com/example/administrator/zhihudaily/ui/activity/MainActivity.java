@@ -1,6 +1,7 @@
 package com.example.administrator.zhihudaily.ui.activity;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -8,7 +9,6 @@ import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.base.AppActivity;
 import com.example.administrator.zhihudaily.base.BaseFragment;
 import com.example.administrator.zhihudaily.ui.fragment.HomeFragment;
-import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,6 +17,7 @@ public class MainActivity extends AppActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+
 
     @Override
     protected BaseFragment getFirstFragment() {
@@ -49,4 +50,7 @@ public class MainActivity extends AppActivity {
     public void onClick(View view) {
 
     }
+
+
+
 }

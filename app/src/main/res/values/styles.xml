@@ -15,4 +15,9 @@
         <item name="android:background">?attr/colorPrimaryDark</item>
         <item name="android:fitsSystemWindows">true</item>
     </style>
+
+    <style name="TextAppearance.ExpandedTitle"
+        parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">25sp</item>
+    </style>
 </resources>

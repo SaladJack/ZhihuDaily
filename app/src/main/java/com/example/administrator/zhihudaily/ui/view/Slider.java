@@ -19,43 +19,46 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.entity.LatestResult;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class Kanner extends FrameLayout implements OnClickListener {
+public class Slider extends FrameLayout implements OnClickListener {
     private List<LatestResult.TopStoriesEntity> topStoriesEntities;
     private List<View> views;
     private Context context;
     private ViewPager vp;
     private boolean isAutoPlay;
     private int currentItem;
-    private int delayTime;
+    private int delayTime = 2000;
     private LinearLayout ll_dot;
     private List<ImageView> iv_dots;
     private Handler handler = new Handler();
     private OnItemClickListener mItemClickListener;
+    private boolean isRestart = false;
 
-    public Kanner(Context context, AttributeSet attrs, int defStyle) {
+    public Slider(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         this.context = context;
         this.topStoriesEntities = new ArrayList<>();
+        currentItem = -1;
         initView();
     }
 
     private void initView() {
         views = new ArrayList<View>();
         iv_dots = new ArrayList<ImageView>();
-        delayTime = 2000;
+
     }
 
-    public Kanner(Context context, AttributeSet attrs) {
+    public Slider(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public Kanner(Context context) {
+    public Slider(Context context) {
         this(context, null);
     }
 
@@ -66,12 +69,13 @@ public class Kanner extends FrameLayout implements OnClickListener {
 
     private void reset() {
         views.clear();
+        iv_dots.clear();
         initUI();
     }
 
     private void initUI() {
         View view = LayoutInflater.from(context).inflate(
-                R.layout.kanner_layout, this, true);
+                R.layout.slider_layout, this, true);
         vp = (ViewPager) view.findViewById(R.id.vp);
         ll_dot = (LinearLayout) view.findViewById(R.id.ll_dot);
         ll_dot.removeAllViews();
@@ -92,7 +96,7 @@ public class Kanner extends FrameLayout implements OnClickListener {
 
         for (int i = 0; i <= len + 1; i++) {
             View fm = LayoutInflater.from(context).inflate(
-                    R.layout.kanner_content_layout, null);
+                    R.layout.slider_content_layout, null);
             ImageView iv = (ImageView) fm.findViewById(R.id.iv_title);
             TextView tv_title = (TextView) fm.findViewById(R.id.tv_title);
             iv.setScaleType(ScaleType.CENTER_CROP);
@@ -117,15 +121,17 @@ public class Kanner extends FrameLayout implements OnClickListener {
         }
         vp.setAdapter(new MyPagerAdapter());
         vp.setFocusable(true);
-        vp.setCurrentItem(1);
+        vp.setCurrentItem(currentItem == -1 ? 1 : currentItem);
         currentItem = 1;
         vp.addOnPageChangeListener(new MyOnPageChangeListener());
-        startPlay();
+        if (!isRestart)
+            startPlay();
     }
 
     private void startPlay() {
         isAutoPlay = true;
-        handler.postDelayed(task, 3000);
+        isRestart = true;
+        handler.postDelayed(task, delayTime);
     }
 
 

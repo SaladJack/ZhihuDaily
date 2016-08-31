@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.example.administrator.zhihudaily.ui.view.Kanner
+    <com.example.administrator.zhihudaily.ui.view.Slider
         android:id="@+id/kanner"
         android:layout_width="match_parent"
         android:layout_height="230dp" />

@@ -2,12 +2,15 @@ package com.example.administrator.zhihudaily.net;
 
 
 
+import com.example.administrator.zhihudaily.entity.BeforeResult;
+import com.example.administrator.zhihudaily.entity.DetailResult;
 import com.example.administrator.zhihudaily.entity.LatestResult;
 import com.example.administrator.zhihudaily.entity.MenuResult;
 
 
 
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -21,4 +24,10 @@ public interface ZhihuService {
 
     @GET("news/latest")
     Observable<LatestResult> getLatestResult();
+
+    @GET("news/before/{date}")
+    Observable<BeforeResult> getBeforeResult(@Path("date") String date);
+
+    @GET("news/{id}")
+    Observable<DetailResult> getDetailResult(@Path("id") int id);
 }

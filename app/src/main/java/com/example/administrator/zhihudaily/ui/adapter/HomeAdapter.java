@@ -1,9 +1,11 @@
 package com.example.administrator.zhihudaily.ui.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,8 +13,9 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.entity.LatestResult;
 import com.example.administrator.zhihudaily.entity.StoriesEntity;
-import com.example.administrator.zhihudaily.ui.view.Kanner;
-import com.orhanobut.logger.Logger;
+import com.example.administrator.zhihudaily.ui.activity.MainActivity;
+import com.example.administrator.zhihudaily.ui.activity.StoryDetailActivity;
+import com.example.administrator.zhihudaily.ui.view.Slider;
 
 import java.util.List;
 
@@ -42,12 +45,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType){
             case TOP_STORIES:
-                Logger.d("Top");
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.kanner,parent,false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.slider,parent,false);
                 return new TopStoryHolder(view);
             case STORIES:
-                Logger.d("Sub");
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_news_item,parent,false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main_news_item,parent,false);
                 return new StroyHolder(view);
             default:
                 return null;
@@ -57,9 +58,15 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof TopStoryHolder){
-            ((TopStoryHolder)holder).kanner.setTopEntities(topStoriesEntityList);
+            ((TopStoryHolder)holder).slider.setTopEntities(topStoriesEntityList);
         }else if (holder instanceof  StroyHolder){
             ((StroyHolder)holder).tv_title.setText(storiesEntityList.get(position - 1).getTitle());
+            ((StroyHolder)holder).fl_story_item.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), StoryDetailActivity.class);
+                intent.putExtra("id",storiesEntityList.get(position - 1).getId());
+                v.getContext().startActivity(intent);
+                ((MainActivity)v.getContext()).overridePendingTransition(R.anim.slide_in_to_left_from_right, 0);
+            });
             Glide.with(((StroyHolder)holder).iv_title.getContext())
                     .load(storiesEntityList.get(position - 1).getImages().get(0))
                     .into(((StroyHolder)holder).iv_title);
@@ -76,18 +83,29 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         return 1 + storiesEntityList.size();
     }
 
-    public class TopStoryHolder extends RecyclerView.ViewHolder{
+    public class TopStoryHolder extends RecyclerView.ViewHolder implements Slider.OnItemClickListener{
         @BindView(R.id.kanner)
-        Kanner kanner;
+        Slider slider;
 
         public TopStoryHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            slider.setOnItemClickListener(this);
+        }
+
+        @Override
+        public void click(View v, LatestResult.TopStoriesEntity entity) {
+            Intent intent = new Intent(v.getContext(), StoryDetailActivity.class);
+            intent.putExtra("id",entity.getId());
+            v.getContext().startActivity(intent);
+            ((MainActivity)v.getContext()).overridePendingTransition(R.anim.slide_in_to_left_from_right, 0);
         }
     }
 
     public class StroyHolder extends RecyclerView.ViewHolder{
 
+        @BindView(R.id.fl_main_news_item)
+        FrameLayout fl_story_item;
         @BindView(R.id.tv_topic)
         TextView tv_topic;
         @BindView(R.id.iv_title)
