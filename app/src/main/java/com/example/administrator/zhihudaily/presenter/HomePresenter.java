@@ -20,7 +20,7 @@ public class HomePresenter extends BasePresenter{
         this.mHomeView = mHomeView;
     }
 
-    public void fetchTopStoriesAndStories(){
+    public void fetchLatestResult(){
         zhihuService.getLatestResult()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

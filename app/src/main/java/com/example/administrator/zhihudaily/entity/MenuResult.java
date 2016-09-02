@@ -1,5 +1,6 @@
 package com.example.administrator.zhihudaily.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -18,9 +19,11 @@ public class MenuResult{
         this.others = others;
     }
 
-    public class Menu {
+    public class Menu implements Serializable {
         private String name;
         private int id;
+        private String thumbnail;
+        private String description;
 
         public String getName() {
             return name;
@@ -38,5 +41,20 @@ public class MenuResult{
             this.id = id;
         }
 
+        public String getThumbnail() {
+            return thumbnail;
+        }
+
+        public void setThumbnail(String thumbnail) {
+            this.thumbnail = thumbnail;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.administrator.zhihudaily.base;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -12,10 +13,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     //布局中Fragment的ID
     protected abstract int getFragmentContentId();
-
-    protected <T extends View> T $(int id) {
-        return (T) super.findViewById(id);
-    }
 
     //添加fragment
     protected void addFragment(BaseFragment fragment) {
@@ -35,6 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             finish();
         }
     }
+
 
     //返回键返回事件
     @Override

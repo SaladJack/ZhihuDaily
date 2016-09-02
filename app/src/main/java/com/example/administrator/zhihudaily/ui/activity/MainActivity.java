@@ -1,7 +1,8 @@
 package com.example.administrator.zhihudaily.ui.activity;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -9,6 +10,7 @@ import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.base.AppActivity;
 import com.example.administrator.zhihudaily.base.BaseFragment;
 import com.example.administrator.zhihudaily.ui.fragment.HomeFragment;
+import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,10 +19,18 @@ public class MainActivity extends AppActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.activity_main)
+    DrawerLayout mDrawerLayout;
+
+    public void replaceFragment(BaseFragment fragment) {
+        addFragment(fragment);
+        closeMenu();
+    }
 
 
     @Override
     protected BaseFragment getFirstFragment() {
+        Logger.d("getFirstFragment");
         return HomeFragment.getInstance();
     }
 
@@ -37,6 +47,7 @@ public class MainActivity extends AppActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         ButterKnife.bind(this);
         initView();
     }
@@ -46,11 +57,12 @@ public class MainActivity extends AppActivity {
         setSupportActionBar(mToolbar);
     }
 
+    public void closeMenu() {
+        mDrawerLayout.closeDrawers();
+    }
+
     @Override
     public void onClick(View view) {
 
     }
-
-
-
 }

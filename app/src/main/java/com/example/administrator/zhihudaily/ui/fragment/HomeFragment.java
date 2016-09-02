@@ -66,7 +66,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface,Swip
     protected void initData() {
         homeAdapter = new HomeAdapter(topStoriesEntityList, storiesEntityList);
         homePresenter = new HomePresenter(this);
-        homePresenter.fetchTopStoriesAndStories();
+        homePresenter.fetchLatestResult();
     }
 
     @Override
@@ -135,7 +135,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface,Swip
 
     @Override
     public void onRefresh() {
-        homePresenter.fetchTopStoriesAndStories();
+        homePresenter.fetchLatestResult();
         sr.setRefreshing(false);
     }
 

@@ -3,10 +3,10 @@ package com.example.administrator.zhihudaily.base;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.administrator.zhihudaily.ui.fragment.MenuFragment;
+import com.orhanobut.logger.Logger;
 
-/**
- * Created by renlei on 2016/5/23.
- */
+
 public abstract class AppActivity extends BaseActivity {
 
     //获取第一个fragment
@@ -26,7 +26,8 @@ public abstract class AppActivity extends BaseActivity {
             handleIntent(getIntent());
         }
         //避免重复添加Fragment
-        if (null == getSupportFragmentManager().getFragments()) {
+        if (null == getSupportFragmentManager().getFragments() || getSupportFragmentManager().getFragments().get(0) instanceof MenuFragment) {
+
             BaseFragment firstFragment = getFirstFragment();
             if (null != firstFragment) {
                 addFragment(firstFragment);
