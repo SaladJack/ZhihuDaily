@@ -53,7 +53,7 @@ public class MainActivity extends AppActivity {
     }
 
     protected void initView() {
-        mToolbar.setTitle("首页");
+        setTitle("首页");
         setSupportActionBar(mToolbar);
     }
 
@@ -61,6 +61,9 @@ public class MainActivity extends AppActivity {
         mDrawerLayout.closeDrawers();
     }
 
+    public void setTitle(String title){
+        mToolbar.setTitle(title);
+    }
     @Override
     public void onClick(View view) {
 

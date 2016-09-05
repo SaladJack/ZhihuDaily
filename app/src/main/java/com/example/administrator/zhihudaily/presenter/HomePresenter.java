@@ -2,9 +2,6 @@ package com.example.administrator.zhihudaily.presenter;
 
 import com.example.administrator.zhihudaily.base.BasePresenter;
 import com.example.administrator.zhihudaily.inter.HomeViewInterface;
-import com.orhanobut.logger.Logger;
-
-import retrofit2.Retrofit;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 

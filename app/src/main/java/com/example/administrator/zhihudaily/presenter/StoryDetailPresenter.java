@@ -3,6 +3,7 @@ package com.example.administrator.zhihudaily.presenter;
 import com.example.administrator.zhihudaily.base.BasePresenter;
 import com.example.administrator.zhihudaily.inter.MenuViewInterface;
 import com.example.administrator.zhihudaily.inter.StoryDetailViewInterface;
+import com.orhanobut.logger.Logger;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -26,6 +27,7 @@ public class StoryDetailPresenter extends BasePresenter {
                     mStoryDetailViewInterface.showTitle(detailResult.getTitle());
                     mStoryDetailViewInterface.showTitlePage(detailResult.getImage());
                     mStoryDetailViewInterface.showWebView(detailResult.getBody());
-                });
+                },
+                error -> mStoryDetailViewInterface.showError());
     }
 }

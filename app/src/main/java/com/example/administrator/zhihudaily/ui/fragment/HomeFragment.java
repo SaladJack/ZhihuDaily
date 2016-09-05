@@ -1,12 +1,14 @@
 package com.example.administrator.zhihudaily.ui.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.base.BaseFragment;
@@ -28,12 +30,14 @@ import butterknife.Unbinder;
  * Created by Administrator on 2016/8/30.
  */
 
-public class HomeFragment extends BaseFragment implements HomeViewInterface,SwipeRefreshLayout.OnRefreshListener {
+public class HomeFragment extends BaseFragment implements HomeViewInterface, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.rv_news)
     RecyclerView rvNews;
     @BindView(R.id.sr)
     SwipeRefreshLayout sr;
+    @BindView(R.id.home_fragment_ll)
+    LinearLayout homeFragmentLl;
 
     private Unbinder unbinder;
     private List<StoriesEntity> storiesEntityList = new ArrayList<>();
@@ -41,7 +45,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface,Swip
     private LinearLayoutManager llm;
     private HomeAdapter homeAdapter;
     private HomePresenter homePresenter;
-    private int pastVisiblesItems,visibleItemCount, totalItemCount;
+    private int pastVisiblesItems, visibleItemCount, totalItemCount;
     private boolean isLoading = false;
     private String date;
 
@@ -86,7 +90,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface,Swip
                     pastVisiblesItems = llm.findFirstVisibleItemPosition();
                     if (!isLoading && (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                         isLoading = true;
-                        Logger.d("date: "+ date);
+                        Logger.d("date: " + date);
                         homePresenter.fetchBeforeStories(date);
                     }
                 }
@@ -128,6 +132,11 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface,Swip
     }
 
     @Override
+    public void showError() {
+        Snackbar.make(homeFragmentLl, "SnackbarTest", Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
@@ -138,5 +147,6 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface,Swip
         homePresenter.fetchLatestResult();
         sr.setRefreshing(false);
     }
+
 
 }

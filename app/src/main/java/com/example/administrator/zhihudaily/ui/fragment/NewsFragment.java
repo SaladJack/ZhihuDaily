@@ -14,6 +14,7 @@ import com.example.administrator.zhihudaily.entity.MenuResult;
 import com.example.administrator.zhihudaily.entity.StoriesEntity;
 import com.example.administrator.zhihudaily.inter.NewsViewInterface;
 import com.example.administrator.zhihudaily.presenter.NewsPresenter;
+import com.example.administrator.zhihudaily.ui.activity.MainActivity;
 import com.example.administrator.zhihudaily.ui.adapter.NewsAdapter;
 
 import java.util.ArrayList;
@@ -41,14 +42,17 @@ public class NewsFragment extends BaseFragment implements NewsViewInterface, Swi
 
 
     @Override
-    public void onRefresh() {
+    protected void initData() {
+        menu = (MenuResult.Menu) getArguments().getSerializable("menu");
+        newsAdapter = new NewsAdapter(menu, storiesEntityList);
+        newsPresenter = new NewsPresenter(this);
         newsPresenter.fetchNewsResult(menu.getId());
-        sr.setRefreshing(false);
     }
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
         unbinder = ButterKnife.bind(this, view);
+        ((MainActivity)getActivity()).setTitle(menu.getName());
         llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvNews.setLayoutManager(llm);
@@ -58,14 +62,6 @@ public class NewsFragment extends BaseFragment implements NewsViewInterface, Swi
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-    }
-
-    @Override
-    protected void initData() {
-        menu = (MenuResult.Menu) getArguments().getSerializable("menu");
-        newsAdapter = new NewsAdapter(menu, storiesEntityList);
-        newsPresenter = new NewsPresenter(this);
-        newsPresenter.fetchNewsResult(menu.getId());
     }
 
     @Override
@@ -89,8 +85,15 @@ public class NewsFragment extends BaseFragment implements NewsViewInterface, Swi
     }
 
     @Override
+    public void onRefresh() {
+        newsPresenter.fetchNewsResult(menu.getId());
+        sr.setRefreshing(false);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
     }
+
 }

@@ -1,12 +1,15 @@
 package com.example.administrator.zhihudaily.ui.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
+
 import com.bumptech.glide.Glide;
 import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.inter.StoryDetailViewInterface;
@@ -33,25 +36,27 @@ public class StoryDetailActivity extends AppCompatActivity implements StoryDetai
     CollapsingToolbarLayout collapsingToolbar;
     @BindView(R.id.webview)
     WebView webview;
+    @BindView(R.id.story_detail_layout)
+    CoordinatorLayout storyDetailLayout;
 
     private int id;
     private StoryDetailPresenter storyDetailPresenter;
-    private String css,html;
+    private String css, html;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_detail);
         ButterKnife.bind(this);
-        id = getIntent().getIntExtra(ID,-1);
+        id = getIntent().getIntExtra(ID, -1);
+        storyDetailPresenter = new StoryDetailPresenter(this);
+        storyDetailPresenter.fetchDetailResult(id);
         initView();
     }
 
     private void initView() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        storyDetailPresenter = new StoryDetailPresenter(this);
-        storyDetailPresenter.fetchDetailResult(id);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         // 开启DOM storage API 功能
@@ -99,5 +104,10 @@ public class StoryDetailActivity extends AppCompatActivity implements StoryDetai
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void showError() {
+        Snackbar.make(storyDetailLayout, "没有网络连接", Snackbar.LENGTH_SHORT).show();
     }
 }
