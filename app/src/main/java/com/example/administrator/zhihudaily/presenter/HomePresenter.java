@@ -1,5 +1,6 @@
 package com.example.administrator.zhihudaily.presenter;
 
+
 import com.example.administrator.zhihudaily.base.BasePresenter;
 import com.example.administrator.zhihudaily.inter.HomeViewInterface;
 import rx.android.schedulers.AndroidSchedulers;
@@ -37,6 +38,5 @@ public class HomePresenter extends BasePresenter{
                     mHomeView.setDate(beforeResult.getDate());
                 });
     }
-
 
 }

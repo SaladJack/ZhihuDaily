@@ -10,4 +10,6 @@
     <color name="gray">#bebebe</color>
     <color name="light_news_item">#f0f0f0</color>
     <color name="light_news_topic">#666666</color>
+    <color name="day">#f9f9f9</color>
+    <color name="night">#343434</color>
 </resources>

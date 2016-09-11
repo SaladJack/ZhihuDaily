@@ -34,8 +34,7 @@ public class ZhihuRetrofit {
                 if (retrofit == null) {
                     File cacheFile = new File(App.getContext().getExternalCacheDir(),"ZhihuDaily");
                     Cache cache = new Cache(cacheFile,1024*1024*50);
-                    Interceptor interceptor = chain ->
-                       {
+                    Interceptor interceptor = chain -> {
                             Request request = chain.request();
                             if (!NetworkUtils.isConnected(App.getContext())) {
                                 request = request.newBuilder()
@@ -44,8 +43,8 @@ public class ZhihuRetrofit {
                             }
                             Response response = chain.proceed(request);
                             if (NetworkUtils.isConnected(App.getContext())) {
-                                int maxAge = 0 * 60;
-                                // 有网络时 设置缓存超时时间0个小时
+                                int maxAge = 0;
+                                //有网络时,设置缓存超时时间0个小时
                                 response.newBuilder()
                                         .header("Cache-Control", "public, max-age=" + maxAge)
                                         .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
@@ -78,4 +77,5 @@ public class ZhihuRetrofit {
         }
         return retrofit;
     }
+
 }

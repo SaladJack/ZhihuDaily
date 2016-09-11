@@ -27,7 +27,6 @@ import butterknife.ButterKnife;
 
 public class StoryDetailActivity extends AppCompatActivity implements StoryDetailViewInterface {
     public static final String ID = "id";
-
     @BindView(R.id.backdrop)
     ImageView backdrop;
     @BindView(R.id.toolbar)
@@ -38,7 +37,6 @@ public class StoryDetailActivity extends AppCompatActivity implements StoryDetai
     WebView webview;
     @BindView(R.id.story_detail_layout)
     CoordinatorLayout storyDetailLayout;
-
     private int id;
     private StoryDetailPresenter storyDetailPresenter;
     private String css, html;
@@ -83,7 +81,7 @@ public class StoryDetailActivity extends AppCompatActivity implements StoryDetai
     @Override
     public void showWebView(String body) {
         css = "<link rel=\"stylesheet\" href=\"file:///android_asset/css/news.css\" type=\"text/css\">";
-        html = "<html><head>" + css + "</head><body>" + body + "</body></html>";
+        html = "<html><head>" + css + "</head><body class=\"night\">" + body + "</body></html>";
         html = html.replace("<div class=\"img-place-holder\">", "");
         webview.loadDataWithBaseURL("x-data://base", html, "text/html", "UTF-8", null);
     }

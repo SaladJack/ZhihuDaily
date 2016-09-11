@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ZhihuDaily</string>
+    <string name="change_daynight">切换主题</string>
 </resources>
