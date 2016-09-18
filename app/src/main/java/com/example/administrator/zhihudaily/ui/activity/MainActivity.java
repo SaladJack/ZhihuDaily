@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.base.AppActivity;
 import com.example.administrator.zhihudaily.base.BaseFragment;
+import com.example.administrator.zhihudaily.client.ServiceManager;
 import com.example.administrator.zhihudaily.ui.fragment.HomeFragment;
 import com.orhanobut.logger.Logger;
 
@@ -53,7 +54,8 @@ public class MainActivity extends AppActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ServiceManager serviceManager = new ServiceManager(this);
+        serviceManager.startService();
         ButterKnife.bind(this);
         initView();
     }
