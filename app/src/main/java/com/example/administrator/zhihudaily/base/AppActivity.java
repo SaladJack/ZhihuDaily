@@ -3,6 +3,7 @@ package com.example.administrator.zhihudaily.base;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.ui.fragment.MenuFragment;
 import com.orhanobut.logger.Logger;
 
@@ -20,8 +21,8 @@ public abstract class AppActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.DayTheme);
         setContentView(getContentViewId());
-
         if (null != getIntent()) {
             handleIntent(getIntent());
         }
@@ -52,4 +53,6 @@ public abstract class AppActivity extends BaseActivity {
         super.onDestroy();
         ActivityManager.getInstance().finishActivity(this);
     }
+
+    protected abstract void refreshUI();
 }

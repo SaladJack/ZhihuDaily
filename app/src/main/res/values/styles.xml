@@ -3,7 +3,6 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColorSecondary">@android:color/white</item>
-        <item name="android:actionMenuTextColor">@android:color/black</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -16,14 +15,40 @@
         <item name="colorPrimary">@android:color/holo_blue_dark</item>
         <item name="colorPrimaryDark">@android:color/holo_blue_dark</item>
         <item name="colorAccent">@android:color/holo_green_light</item>
-        <item name="android:textColorPrimary">@android:color/white</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+
+        <item name="navdrawer_background">@color/navdrawer_background</item>
+        <item name="navdrawer_text_color">@color/navdrawer_text_color</item>
+        <item name="item_date_text_color">@color/item_date_text_color</item>
+        <item name="item_story_text_color">@color/item_story_text_color</item>
+        <item name="item_story_background_color">@color/card_background_color</item>
+        <item name="android:windowBackground">@color/style_window_background</item>
+        <item name="windowBackground">@color/style_window_background</item>
+        <item name="menu_background">@color/style_window_background</item>
+        <item name="menu_text_color">@color/menu_text_color</item>
+    </style>
+    <style name="NightTheme" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/color222222</item>
+        <item name="colorPrimaryDark">@color/color252525</item>
+        <item name="navdrawer_background">@color/color343434</item>
+        <item name="navdrawer_text_color">@color/color999999</item>
+        <item name="item_date_text_color">@color/color888888</item>
+        <item name="item_story_text_color">@color/white</item>
+        <item name="item_story_background_color">@color/color404040</item>
+        <item name="android:windowBackground">@color/window_background_night</item>
+        <item name="windowBackground">@color/window_background_night</item>
+        <item name="menu_background">@color/window_background_night</item>
+        <item name="menu_text_color">@color/white</item>
     </style>
     <style name="ToolbarStyle">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="android:background">?attr/colorPrimaryDark</item>
         <item name="android:fitsSystemWindows">true</item>
+        <item name="actionMenuTextColor">@android:color/black</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
 
     <style name="TextAppearance.ExpandedTitle"

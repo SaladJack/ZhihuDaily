@@ -50,6 +50,11 @@ public class NewsFragment extends BaseFragment implements NewsViewInterface, Swi
     }
 
     @Override
+    public void refreshUI() {
+
+    }
+
+    @Override
     protected void initView(View view, Bundle savedInstanceState) {
         unbinder = ButterKnife.bind(this, view);
         ((MainActivity)getActivity()).setTitle(menu.getName());

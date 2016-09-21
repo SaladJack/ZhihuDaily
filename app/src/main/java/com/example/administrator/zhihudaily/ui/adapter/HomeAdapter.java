@@ -32,8 +32,8 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private  List<LatestResult.TopStoriesEntity> topStoriesEntityList;
     private  List<StoriesEntity> storiesEntityList;
-    public final int TOP_STORIES = 0;
-    public final int STORIES = 1;
+    public static final int TOP_STORIES = 0;
+    public static final int STORIES = 1;
     private View view;
 
     public HomeAdapter(List<LatestResult.TopStoriesEntity> topStoriesEntityList, List<StoriesEntity> storiesEntityList) {

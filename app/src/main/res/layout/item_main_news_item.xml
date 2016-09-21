@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/light_news_item"
+    android:background="?attr/item_story_background_color"
     android:orientation="vertical">
 
     <FrameLayout
@@ -13,7 +13,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/item_background_selector_light"
+        android:background="@color/transparent"
         android:orientation="horizontal">
 
         <TextView
@@ -22,14 +22,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="今日热闻"
-            android:textColor="@color/light_news_topic"
+            android:textColor="?attr/item_story_text_color"
             android:textSize="13sp"
             android:visibility="gone" />
 
         <RelativeLayout
+            android:id="@+id/rl_main_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:background="@color/transparent"
             android:padding="10dp">
 
 

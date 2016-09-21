@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="navdrawer_background" format="color"/>
+    <attr name="navdrawer_text_color" format="color"/>
+    <attr name="item_date_text_color" format="color"/>
+    <attr name="item_story_text_color" format="color"/>
+    <attr name="item_story_background_color" format="color"/>
+    <attr name="menu_background" format="color"/>
+    <attr name="menu_text_color" format="color"/>
+    <attr name="windowBackground" format="color"/>
+</resources>

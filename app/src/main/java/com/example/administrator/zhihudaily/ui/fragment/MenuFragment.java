@@ -72,4 +72,6 @@ public class MenuFragment extends Fragment implements MenuViewInterface {
         this.menuList.addAll(menuList);
         menuAdapter.notifyDataSetChanged();
     }
+
+
 }

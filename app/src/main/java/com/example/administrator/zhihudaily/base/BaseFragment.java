@@ -14,6 +14,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void initView(View view, Bundle savedInstanceState);
     protected abstract void initData();
+    public abstract void refreshUI();
 
     //获取fragment布局文件ID
     protected abstract int getLayoutId();
