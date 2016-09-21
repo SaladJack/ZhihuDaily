@@ -1,10 +1,12 @@
 package com.example.administrator.zhihudaily.ui.activity;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -14,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.inter.StoryDetailViewInterface;
 import com.example.administrator.zhihudaily.presenter.StoryDetailPresenter;
+import com.example.administrator.zhihudaily.utils.SharedPrefUtils;
 
 import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
 
@@ -30,7 +33,7 @@ public class StoryDetailActivity extends AppCompatActivity implements StoryDetai
     @BindView(R.id.backdrop)
     ImageView backdrop;
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar mToolbar;
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
     @BindView(R.id.webview)
@@ -40,10 +43,14 @@ public class StoryDetailActivity extends AppCompatActivity implements StoryDetai
     private int id;
     private StoryDetailPresenter storyDetailPresenter;
     private String css, html;
+    private boolean isNightMode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isNightMode = SharedPrefUtils.isNightMode(this);
+        if (isNightMode)
+            setTheme(R.style.NightTheme);
         setContentView(R.layout.activity_story_detail);
         ButterKnife.bind(this);
         id = getIntent().getIntExtra(ID, -1);
@@ -53,7 +60,7 @@ public class StoryDetailActivity extends AppCompatActivity implements StoryDetai
     }
 
     private void initView() {
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
@@ -65,6 +72,12 @@ public class StoryDetailActivity extends AppCompatActivity implements StoryDetai
         webview.getSettings().setAppCacheEnabled(true);
     }
 
+    private void refreshToolBar() {
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = getTheme();
+        theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
+        mToolbar.setBackgroundColor(getResources().getColor(typedValue.resourceId));
+    }
 
     @Override
     public void showTitle(String title) {
@@ -81,7 +94,7 @@ public class StoryDetailActivity extends AppCompatActivity implements StoryDetai
     @Override
     public void showWebView(String body) {
         css = "<link rel=\"stylesheet\" href=\"file:///android_asset/css/news.css\" type=\"text/css\">";
-        html = "<html><head>" + css + "</head><body class=\"night\">" + body + "</body></html>";
+        html = !isNightMode ? "<html><head>" + css + "</head><body>" + body + "</body></html>" : "<html><head>" + css + "</head><body class=\"night\">" + body + "</body></html>";
         html = html.replace("<div class=\"img-place-holder\">", "");
         webview.loadDataWithBaseURL("x-data://base", html, "text/html", "UTF-8", null);
     }

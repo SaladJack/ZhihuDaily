@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_main_news_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/item_story_background_color"
+    android:background="?attr/item_story_ll_background_color"
     android:orientation="vertical">
 
     <FrameLayout
@@ -31,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/transparent"
+            android:background="?attr/item_story_background_color"
             android:padding="10dp">
 
 
@@ -49,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_toLeftOf="@id/iv_title"
+                android:textColor="?attr/item_story_text_color"
                 android:padding="5dp"
                 android:text="如何看待当下这种越来越普遍的“沉默”人格？"
                 android:textSize="18sp" />

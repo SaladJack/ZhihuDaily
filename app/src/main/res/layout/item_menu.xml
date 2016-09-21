@@ -8,5 +8,6 @@
 <TextView
     android:id="@+id/menu_item_name"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content"
+    android:textColor="?attr/navdrawer_text_color"/>
 </LinearLayout>

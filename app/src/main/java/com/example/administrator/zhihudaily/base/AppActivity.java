@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.ui.fragment.MenuFragment;
+import com.example.administrator.zhihudaily.utils.SharedPrefUtils;
 import com.orhanobut.logger.Logger;
 
 
@@ -21,7 +22,8 @@ public abstract class AppActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.DayTheme);
+        boolean isNightMode = SharedPrefUtils.isNightMode(this);
+        if (isNightMode) setTheme(R.style.NightTheme);
         setContentView(getContentViewId());
         if (null != getIntent()) {
             handleIntent(getIntent());

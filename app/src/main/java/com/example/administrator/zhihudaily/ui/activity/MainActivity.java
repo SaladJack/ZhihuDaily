@@ -22,6 +22,9 @@ import com.example.administrator.zhihudaily.base.AppActivity;
 import com.example.administrator.zhihudaily.base.BaseFragment;
 import com.example.administrator.zhihudaily.client.ServiceManager;
 import com.example.administrator.zhihudaily.ui.fragment.HomeFragment;
+import com.example.administrator.zhihudaily.ui.fragment.MenuFragment;
+import com.example.administrator.zhihudaily.utils.SharedPrefUtils;
+import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +35,8 @@ public class MainActivity extends AppActivity {
     Toolbar mToolbar;
     @BindView(R.id.activity_main)
     DrawerLayout mDrawerLayout;
-    Boolean isNightMode = false;
+    MenuFragment mMenuFragment;
+    Boolean isNightMode;
     BaseFragment mCurrentFragment;
     public void replaceFragment(BaseFragment fragment) {
         addFragment(fragment);
@@ -67,6 +71,7 @@ public class MainActivity extends AppActivity {
     }
 
     protected void initView() {
+        mMenuFragment = (MenuFragment) getSupportFragmentManager().findFragmentById(R.id.menu_fragment);
         setTitle("首页");
         setSupportActionBar(mToolbar);
         mToolbar.setTitleTextColor(0xFFFFFFFF);
@@ -87,6 +92,7 @@ public class MainActivity extends AppActivity {
     @Override
     protected void refreshUI() {
         mCurrentFragment.refreshUI();
+        mMenuFragment.refreshUI();
         refreshToolBar();
     }
 
@@ -97,7 +103,6 @@ public class MainActivity extends AppActivity {
             Resources.Theme theme = getTheme();
             theme.resolveAttribute(R.attr.colorPrimaryDark, statusBarColor, true);
             theme.resolveAttribute(R.attr.colorPrimaryDark, navigationBarColor, true);
-
             Resources resources = getResources();
             getWindow().setStatusBarColor(resources.getColor(statusBarColor.resourceId));
             getWindow().setNavigationBarColor(resources.getColor(navigationBarColor.resourceId));
@@ -113,8 +118,7 @@ public class MainActivity extends AppActivity {
     }
 
     private void toggleThemeSetting() {
-//        Boolean isNightMode = SharedPrefUtils.isNightMode(this);
-
+        isNightMode = SharedPrefUtils.isNightMode(this);
         if (isNightMode) {
             setTheme(R.style.DayTheme);
             isNightMode = false;
@@ -122,7 +126,7 @@ public class MainActivity extends AppActivity {
             setTheme(R.style.NightTheme);
             isNightMode = true;
         }
-//        SharedPrefUtils.markIsNightMode(this,!isNightMode);
+        SharedPrefUtils.setNightMode(this,isNightMode);
     }
 
     @Override

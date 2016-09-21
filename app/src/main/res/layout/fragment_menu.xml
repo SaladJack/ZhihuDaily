@@ -9,7 +9,7 @@
         android:id="@+id/ll_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/light_menu_header"
+        android:background="?attr/colorPrimaryDark"
         android:orientation="vertical"
         android:paddingBottom="10dp">
 
@@ -72,19 +72,19 @@
         android:id="@+id/tv_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/light_menu_index_background"
+        android:background="?attr/navdrawer_background"
         android:paddingBottom="10dp"
         android:paddingLeft="80dp"
         android:paddingTop="10dp"
         android:text="首页"
-        android:textColor="@android:color/holo_blue_dark"
+        android:textColor="?attr/navdrawer_text_color"
         android:textSize="18sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="?attr/navdrawer_background"
         android:divider="@android:color/transparent"
         android:scrollbars="none"/>
 

@@ -163,10 +163,13 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface, Swi
     public void refreshUI() {
         TypedValue itemStoryTextColor = new TypedValue();
         TypedValue itemStoryBackground = new TypedValue();
+        TypedValue itemStoryLlBackground = new TypedValue();
         TypedValue windowBackground = new TypedValue();
+
         Resources.Theme theme = getActivity().getTheme();
         theme.resolveAttribute(R.attr.item_story_text_color, itemStoryTextColor, true);
         theme.resolveAttribute(R.attr.item_story_background_color, itemStoryBackground, true);
+        theme.resolveAttribute(R.attr.item_story_ll_background_color, itemStoryLlBackground, true);
         theme.resolveAttribute(R.attr.windowBackground, windowBackground, true);
 
         Resources resources = getResources();
@@ -181,13 +184,12 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface, Swi
                     break;
                 case HomeAdapter.STORIES:
                     ViewGroup storyView = (ViewGroup) rvNews.getChildAt(childIndex);
-                    storyView.setBackgroundColor(resources.getColor(itemStoryBackground.resourceId));
-//                    storyView.findViewById(R.id.rl_main_item).setBackgroundColor(itemStoryBackground.resourceId);
-//                    ((TextView)storyView.findViewById(R.id.tv_title)).setTextColor(itemStoryTextColor.resourceId);
+                    storyView.findViewById(R.id.ll_main_news_item).setBackgroundResource(itemStoryLlBackground.resourceId);
+                    storyView.findViewById(R.id.rl_main_item).setBackgroundResource(itemStoryBackground.resourceId);
+                    ((TextView)storyView.findViewById(R.id.tv_title)).setTextColor(resources.getColor(itemStoryTextColor.resourceId));
                     break;
             }
         }
-        homeAdapter.notifyDataSetChanged();
         invalidateCacheItem();
     }
 
@@ -204,15 +206,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface, Swi
             declaredMethod.invoke(declaredField.get(rvNews), new Object[0]);
             RecyclerView.RecycledViewPool recycledViewPool = rvNews.getRecycledViewPool();
             recycledViewPool.clear();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -16,12 +16,12 @@
         <item name="colorPrimaryDark">@android:color/holo_blue_dark</item>
         <item name="colorAccent">@android:color/holo_green_light</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-
         <item name="navdrawer_background">@color/navdrawer_background</item>
         <item name="navdrawer_text_color">@color/navdrawer_text_color</item>
         <item name="item_date_text_color">@color/item_date_text_color</item>
         <item name="item_story_text_color">@color/item_story_text_color</item>
         <item name="item_story_background_color">@color/card_background_color</item>
+        <item name="item_story_ll_background_color">@color/colorf5f5f5</item>
         <item name="android:windowBackground">@color/style_window_background</item>
         <item name="windowBackground">@color/style_window_background</item>
         <item name="menu_background">@color/style_window_background</item>
@@ -35,6 +35,7 @@
         <item name="item_date_text_color">@color/color888888</item>
         <item name="item_story_text_color">@color/white</item>
         <item name="item_story_background_color">@color/color404040</item>
+        <item name="item_story_ll_background_color">@color/color343434</item>
         <item name="android:windowBackground">@color/window_background_night</item>
         <item name="windowBackground">@color/window_background_night</item>
         <item name="menu_background">@color/window_background_night</item>

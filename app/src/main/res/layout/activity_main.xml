@@ -11,6 +11,7 @@
         android:layout_height="match_parent">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
+            android:background="?attr/colorPrimary"
             style="@style/ToolbarStyle"/>
             <FrameLayout
                 android:id="@+id/fl_content"
