@@ -6,7 +6,6 @@ import android.os.Bundle;
 import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.ui.fragment.MenuFragment;
 import com.example.administrator.zhihudaily.utils.SharedPrefUtils;
-import com.orhanobut.logger.Logger;
 
 
 public abstract class AppActivity extends BaseActivity {

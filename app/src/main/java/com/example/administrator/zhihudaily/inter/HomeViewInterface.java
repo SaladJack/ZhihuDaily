@@ -1,7 +1,6 @@
 package com.example.administrator.zhihudaily.inter;
 
 import com.example.administrator.zhihudaily.base.BaseViewInterface;
-import com.example.administrator.zhihudaily.entity.BeforeResult;
 import com.example.administrator.zhihudaily.entity.LatestResult;
 import com.example.administrator.zhihudaily.entity.StoriesEntity;
 

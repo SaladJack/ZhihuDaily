@@ -72,12 +72,7 @@ public class StoryDetailActivity extends AppCompatActivity implements StoryDetai
         webview.getSettings().setAppCacheEnabled(true);
     }
 
-    private void refreshToolBar() {
-        TypedValue typedValue = new TypedValue();
-        Resources.Theme theme = getTheme();
-        theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
-        mToolbar.setBackgroundColor(getResources().getColor(typedValue.resourceId));
-    }
+
 
     @Override
     public void showTitle(String title) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright (C) 2010 Moduad Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,18 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.administrator.zhihudaily.client;
+package com.example.administrator.zhihudaily.push;
 
 /** 
- * Utility class for LogCat.
+ * Runtime exceptions produced by wrong meta-data settings.
  *
  * @author Sehwan Noh (devnoh@gmail.com)
  */
-public class LogUtil {
-    
-    @SuppressWarnings("unchecked")
-    public static String makeLogTag(Class cls) {
-        return "Androidpn_" + cls.getSimpleName();
+public class InvalidFormatException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
+
+    public InvalidFormatException() {
+        super();
+    }
+
+    public InvalidFormatException(String message) {
+        super(message);
+    }
+
+    public InvalidFormatException(Throwable cause) {
+        super(cause);
+    }
+
+    public InvalidFormatException(String message, Throwable cause) {
+        super(message, cause);
     }
 
 }

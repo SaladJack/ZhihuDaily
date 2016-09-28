@@ -1,6 +1,5 @@
 package com.example.administrator.zhihudaily.ui.fragment;
 
-import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -11,7 +10,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,16 +17,23 @@ import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.base.BaseFragment;
 import com.example.administrator.zhihudaily.entity.LatestResult;
 import com.example.administrator.zhihudaily.entity.StoriesEntity;
+import com.example.administrator.zhihudaily.injector.component.ApplicationComponent;
+import com.example.administrator.zhihudaily.injector.component.DaggerHomeComponent;
+import com.example.administrator.zhihudaily.injector.component.HomeComponent;
+import com.example.administrator.zhihudaily.injector.module.ActivityModule;
+import com.example.administrator.zhihudaily.injector.module.HomeModule;
 import com.example.administrator.zhihudaily.inter.HomeViewInterface;
 import com.example.administrator.zhihudaily.presenter.HomePresenter;
+import com.example.administrator.zhihudaily.ui.activity.MainActivity;
 import com.example.administrator.zhihudaily.ui.adapter.HomeAdapter;
 import com.orhanobut.logger.Logger;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,20 +44,20 @@ import butterknife.Unbinder;
  */
 
 public class HomeFragment extends BaseFragment implements HomeViewInterface, SwipeRefreshLayout.OnRefreshListener {
-
+    @Inject
+    HomePresenter homePresenter;
     @BindView(R.id.rv_news)
     RecyclerView rvNews;
     @BindView(R.id.sr)
     SwipeRefreshLayout sr;
+
     @BindView(R.id.home_fragment_ll)
     LinearLayout homeFragmentLl;
-
     private Unbinder unbinder;
     private List<StoriesEntity> storiesEntityList = new ArrayList<>();
     private List<LatestResult.TopStoriesEntity> topStoriesEntityList = new ArrayList<>();
     private LinearLayoutManager llm;
     private HomeAdapter homeAdapter;
-    private HomePresenter homePresenter;
     private int pastVisiblesItems, visibleItemCount, totalItemCount;
     private boolean isLoading = false;
     private String date;
@@ -77,12 +82,21 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface, Swi
 
     @Override
     protected void initData() {
+        injectDependences();
         homeAdapter = new HomeAdapter(topStoriesEntityList, storiesEntityList);
-        homePresenter = new HomePresenter(this);
+        //homePresenter = new HomePresenter(this);
         homePresenter.fetchLatestResult();
     }
 
-
+    private void injectDependences() {
+        ApplicationComponent applicationComponent = ((MainActivity) getActivity()).getApplicationComponent();
+        HomeComponent dailyStoryComponent = DaggerHomeComponent.builder()
+                .applicationComponent(applicationComponent)
+                .activityModule(new ActivityModule(getActivity()))
+                .homeModule(new HomeModule(this))
+                .build();
+        dailyStoryComponent.inject(this);
+    }
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {

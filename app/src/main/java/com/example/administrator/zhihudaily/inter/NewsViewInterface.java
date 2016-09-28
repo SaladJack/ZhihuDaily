@@ -1,7 +1,5 @@
 package com.example.administrator.zhihudaily.inter;
 
-import com.example.administrator.zhihudaily.entity.MenuResult;
-import com.example.administrator.zhihudaily.entity.NewsHead;
 import com.example.administrator.zhihudaily.entity.StoriesEntity;
 
 import java.util.List;

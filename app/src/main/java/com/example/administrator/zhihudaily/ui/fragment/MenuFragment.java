@@ -18,7 +18,6 @@ import com.example.administrator.zhihudaily.entity.MenuResult;
 import com.example.administrator.zhihudaily.inter.MenuViewInterface;
 import com.example.administrator.zhihudaily.presenter.MenuPresenter;
 import com.example.administrator.zhihudaily.ui.activity.MainActivity;
-import com.example.administrator.zhihudaily.ui.adapter.HomeAdapter;
 import com.example.administrator.zhihudaily.ui.adapter.MenuAdapter;
 
 import java.lang.reflect.Field;

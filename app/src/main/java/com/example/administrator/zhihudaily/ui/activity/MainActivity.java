@@ -18,13 +18,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.zhihudaily.R;
+import com.example.administrator.zhihudaily.app.DailyApplication;
 import com.example.administrator.zhihudaily.base.AppActivity;
 import com.example.administrator.zhihudaily.base.BaseFragment;
-import com.example.administrator.zhihudaily.client.ServiceManager;
+import com.example.administrator.zhihudaily.injector.component.ApplicationComponent;
 import com.example.administrator.zhihudaily.ui.fragment.HomeFragment;
 import com.example.administrator.zhihudaily.ui.fragment.MenuFragment;
 import com.example.administrator.zhihudaily.utils.SharedPrefUtils;
-import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,8 +64,8 @@ public class MainActivity extends AppActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ServiceManager serviceManager = new ServiceManager(this);
-        serviceManager.startService();
+//        ServiceManager serviceManager = new ServiceManager(this);
+//        serviceManager.startService();
         ButterKnife.bind(this);
         initView();
     }
@@ -197,5 +197,10 @@ public class MainActivity extends AppActivity {
     @Override
     public void onClick(View view) {
 
+    }
+
+    public ApplicationComponent getApplicationComponent() {
+        ApplicationComponent applicationComponent = ((DailyApplication) getApplication()).getApplicationComponent();
+        return applicationComponent;
     }
 }

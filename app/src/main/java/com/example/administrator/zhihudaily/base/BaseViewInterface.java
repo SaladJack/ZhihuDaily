@@ -5,5 +5,5 @@ package com.example.administrator.zhihudaily.base;
  */
 
 public interface BaseViewInterface {
-    abstract void showError();
+    void showError();
 }

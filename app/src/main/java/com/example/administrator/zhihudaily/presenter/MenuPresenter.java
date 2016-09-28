@@ -2,10 +2,7 @@ package com.example.administrator.zhihudaily.presenter;
 
 import com.example.administrator.zhihudaily.base.BasePresenter;
 import com.example.administrator.zhihudaily.inter.MenuViewInterface;
-import com.example.administrator.zhihudaily.net.ZhihuRetrofit;
-import com.example.administrator.zhihudaily.net.ZhihuService;
 
-import retrofit2.Retrofit;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 

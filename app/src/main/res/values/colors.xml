@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
 
     <!--pure color-->
     <color name="white">#ffffffff</color>
@@ -11,22 +8,9 @@
 
     <color name="style_window_background">@color/white</color>
 
-    <color name="light_menu_index_background">#dfdfdf</color>
-    <color name="light_menu_header">@android:color/holo_blue_dark</color>
-    <color name="dark_selector_drawable">#333333</color>
-    <color name="gray">#bebebe</color>
-    <color name="light_news_item">#f0f0f0</color>
-    <color name="light_news_topic">#666666</color>
-    <color name="day">#f9f9f9</color>
-    <color name="night">#343434</color>
-
     <!--custom color-->
-    <color name="navigation_item_selected">#12000000</color>
     <color name="navdrawer_background">@color/white</color>
     <color name="navdrawer_text_color">@color/black</color>
-    <color name="navdrawer_text_color_selected">@color/colorPrimary</color>
-    <color name="navdrawer_icon_tint">#888</color>
-    <color name="navdrawer_icon_tion_selected">@color/colorPrimary</color>
     <color name="item_date_text_color">#666666</color>
     <color name="card_background_color">#ffffff</color>
     <color name="item_story_text_color">#ff000000</color>

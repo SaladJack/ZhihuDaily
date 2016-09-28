@@ -5,9 +5,6 @@ import android.content.Context;
 
 import java.util.Stack;
 
-/**
- * Created by renlei on 2016/5/23.
- */
 public class ActivityManager {
     private static Stack<Activity> activityStack;
     private static ActivityManager instance;
@@ -67,7 +64,7 @@ public class ActivityManager {
     /**
      * 结束全部的Activity
      */
-    public void finishAllActivity(){
+    private void finishAllActivity(){
         for (int i = 0, size = activityStack.size(); i < size; i++){
             if (null != activityStack.get(i)){
                 activityStack.get(i).finish();

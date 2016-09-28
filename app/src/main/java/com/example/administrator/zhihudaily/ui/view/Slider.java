@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.entity.LatestResult;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -226,7 +225,7 @@ public class Slider extends FrameLayout implements OnClickListener {
     }
 
     public interface OnItemClickListener {
-        public void click(View v, LatestResult.TopStoriesEntity entity);
+        void click(View v, LatestResult.TopStoriesEntity entity);
     }
 
     @Override

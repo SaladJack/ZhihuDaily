@@ -1,16 +1,10 @@
 package com.example.administrator.zhihudaily.net;
 
-import android.app.Application;
-import android.content.Context;
-import android.text.TextUtils;
-
-import com.example.administrator.zhihudaily.app.App;
+import com.example.administrator.zhihudaily.app.DailyApplication;
 import com.example.administrator.zhihudaily.app.Constants;
 import com.example.administrator.zhihudaily.utils.NetworkUtils;
-import com.orhanobut.logger.Logger;
 
 import java.io.File;
-import java.io.IOException;
 
 import okhttp3.Cache;
 import okhttp3.CacheControl;
@@ -32,17 +26,17 @@ public class ZhihuRetrofit {
         if (retrofit == null) {
             synchronized (ZhihuRetrofit.class) {
                 if (retrofit == null) {
-                    File cacheFile = new File(App.getContext().getExternalCacheDir(),"ZhihuDaily");
+                    File cacheFile = new File(DailyApplication.getContext().getExternalCacheDir(),"ZhihuDaily");
                     Cache cache = new Cache(cacheFile,1024*1024*50);
                     Interceptor interceptor = chain -> {
                             Request request = chain.request();
-                            if (!NetworkUtils.isConnected(App.getContext())) {
+                            if (!NetworkUtils.isConnected(DailyApplication.getContext())) {
                                 request = request.newBuilder()
                                         .cacheControl(CacheControl.FORCE_CACHE)
                                         .build();
                             }
                             Response response = chain.proceed(request);
-                            if (NetworkUtils.isConnected(App.getContext())) {
+                            if (NetworkUtils.isConnected(DailyApplication.getContext())) {
                                 int maxAge = 0;
                                 //有网络时,设置缓存超时时间0个小时
                                 response.newBuilder()
