@@ -22,8 +22,8 @@ import com.example.administrator.zhihudaily.app.DailyApplication;
 import com.example.administrator.zhihudaily.base.AppActivity;
 import com.example.administrator.zhihudaily.base.BaseFragment;
 import com.example.administrator.zhihudaily.injector.component.ApplicationComponent;
+import com.example.administrator.zhihudaily.ui.fragment.NavigationFragment;
 import com.example.administrator.zhihudaily.ui.fragment.HomeFragment;
-import com.example.administrator.zhihudaily.ui.fragment.MenuFragment;
 import com.example.administrator.zhihudaily.utils.SharedPrefUtils;
 
 import butterknife.BindView;
@@ -35,7 +35,7 @@ public class MainActivity extends AppActivity {
     Toolbar mToolbar;
     @BindView(R.id.activity_main)
     DrawerLayout mDrawerLayout;
-    MenuFragment mMenuFragment;
+    NavigationFragment mNavigationFragment;
     Boolean isNightMode;
     BaseFragment mCurrentFragment;
     public void replaceFragment(BaseFragment fragment) {
@@ -61,6 +61,7 @@ public class MainActivity extends AppActivity {
         return R.id.fl_content;
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +72,7 @@ public class MainActivity extends AppActivity {
     }
 
     protected void initView() {
-        mMenuFragment = (MenuFragment) getSupportFragmentManager().findFragmentById(R.id.menu_fragment);
+        mNavigationFragment = (NavigationFragment) getSupportFragmentManager().findFragmentById(R.id.menu_fragment);
         setTitle("首页");
         setSupportActionBar(mToolbar);
         mToolbar.setTitleTextColor(0xFFFFFFFF);
@@ -92,7 +93,7 @@ public class MainActivity extends AppActivity {
     @Override
     protected void refreshUI() {
         mCurrentFragment.refreshUI();
-        mMenuFragment.refreshUI();
+        mNavigationFragment.refreshUI();
         refreshToolBar();
     }
 

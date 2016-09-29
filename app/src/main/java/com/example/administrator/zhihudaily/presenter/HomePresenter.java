@@ -2,7 +2,11 @@ package com.example.administrator.zhihudaily.presenter;
 
 
 import com.example.administrator.zhihudaily.base.BasePresenter;
-import com.example.administrator.zhihudaily.inter.HomeViewInterface;
+import com.example.administrator.zhihudaily.base.RxPresenter;
+import com.example.administrator.zhihudaily.net.ZhihuService;
+import com.example.administrator.zhihudaily.presenter.contract.HomeContract;
+
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -10,32 +14,35 @@ import rx.schedulers.Schedulers;
  * Created by Administrator on 2016/8/30.
  */
 
-public class HomePresenter extends BasePresenter{
-    private HomeViewInterface mHomeView;
+public class HomePresenter extends RxPresenter<HomeContract.View> implements HomeContract.Presenter{
 
-    public HomePresenter(HomeViewInterface mHomeView) {
-        super();
-        this.mHomeView = mHomeView;
+    private ZhihuService zhihuService;
+
+    public HomePresenter(ZhihuService zhihuService) {
+        this.zhihuService = zhihuService;
     }
 
+    @Override
     public void fetchLatestResult(){
-        zhihuService.getLatestResult()
+        Subscription subscription = zhihuService.getLatestResult()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(latestResult -> {
-                    mHomeView.setDate(latestResult.getDate());
-                    mHomeView.showTopStories(latestResult.getTop_stories());
-                    mHomeView.showStroies(latestResult.getStories());
-                });
+                    mView.setDate(latestResult.getDate());
+                    mView.showTopStories(latestResult.getTop_stories());
+                    mView.showStroies(latestResult.getStories());
+                }, error -> {});
+        addSubscrebe(subscription);
     }
 
+    @Override
     public void fetchBeforeStories(String date){
         zhihuService.getBeforeResult(date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(beforeResult -> {
-                    mHomeView.showBefore(beforeResult.getStories());
-                    mHomeView.setDate(beforeResult.getDate());
+                    mView.showBefore(beforeResult.getStories());
+                    mView.setDate(beforeResult.getDate());
                 });
     }
 

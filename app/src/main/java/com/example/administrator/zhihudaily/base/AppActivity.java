@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.administrator.zhihudaily.R;
-import com.example.administrator.zhihudaily.ui.fragment.MenuFragment;
+import com.example.administrator.zhihudaily.ui.fragment.NavigationFragment;
 import com.example.administrator.zhihudaily.utils.SharedPrefUtils;
 
+import javax.inject.Inject;
 
-public abstract class AppActivity extends BaseActivity {
+import butterknife.ButterKnife;
 
+
+public abstract class AppActivity<T extends BasePresenter>  extends BaseActivity implements BaseView {
+    @Inject
+    protected T mPresenter;
     //获取第一个fragment
     protected abstract BaseFragment getFirstFragment();
 
@@ -24,11 +29,14 @@ public abstract class AppActivity extends BaseActivity {
         boolean isNightMode = SharedPrefUtils.isNightMode(this);
         if (isNightMode) setTheme(R.style.NightTheme);
         setContentView(getContentViewId());
+        ButterKnife.bind(this);
+        if (mPresenter != null) mPresenter.attachView(this);
+
         if (null != getIntent()) {
             handleIntent(getIntent());
         }
         //避免重复添加Fragment
-        if (null == getSupportFragmentManager().getFragments() || getSupportFragmentManager().getFragments().get(0) instanceof MenuFragment) {
+        if (null == getSupportFragmentManager().getFragments() || getSupportFragmentManager().getFragments().get(0) instanceof NavigationFragment) {
 
             BaseFragment firstFragment = getFirstFragment();
             if (null != firstFragment) {
@@ -38,6 +46,7 @@ public abstract class AppActivity extends BaseActivity {
 
         ActivityManager.getInstance().addActivity(this);
     }
+
 
     @Override
     protected int getContentViewId() {
@@ -52,6 +61,7 @@ public abstract class AppActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mPresenter != null) mPresenter.detachView();
         ActivityManager.getInstance().finishActivity(this);
     }
 

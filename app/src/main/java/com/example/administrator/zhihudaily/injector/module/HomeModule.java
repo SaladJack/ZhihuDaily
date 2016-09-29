@@ -1,7 +1,8 @@
 package com.example.administrator.zhihudaily.injector.module;
 
-import com.example.administrator.zhihudaily.inter.HomeViewInterface;
+import com.example.administrator.zhihudaily.net.ZhihuService;
 import com.example.administrator.zhihudaily.presenter.HomePresenter;
+import com.example.administrator.zhihudaily.presenter.contract.HomeContract;
 
 import dagger.Module;
 import dagger.Provides;
@@ -11,14 +12,14 @@ import dagger.Provides;
  */
 @Module
 public class HomeModule {
-    private HomeViewInterface mHomeViewInterface;
+    private HomeContract.View mView;
 
-    public HomeModule(HomeViewInterface mHomeViewInterface) {
-        this.mHomeViewInterface = mHomeViewInterface;
+    public HomeModule(HomeContract.View mView) {
+        this.mView = mView;
     }
 
     @Provides
-    public HomePresenter getHomePresenter(){
-        return new HomePresenter(mHomeViewInterface);
+    public HomePresenter provideHomePresenter(ZhihuService zhihuService){
+        return new HomePresenter(zhihuService);
     }
 }

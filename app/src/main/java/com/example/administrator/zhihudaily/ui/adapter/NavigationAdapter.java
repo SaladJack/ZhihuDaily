@@ -23,12 +23,12 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2016/8/30.
  */
 
-public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class NavigationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     List<MenuResult.Menu> menuList;
     private View view;
 
-    public MenuAdapter(List<MenuResult.Menu> menuList) {
+    public NavigationAdapter(List<MenuResult.Menu> menuList) {
         this.menuList = menuList;
     }
 

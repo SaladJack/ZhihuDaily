@@ -9,11 +9,9 @@ import retrofit2.Retrofit;
  * Created by Administrator on 2016/8/30.
  */
 
-public class BasePresenter {
-    protected Retrofit retrofit;
-    protected ZhihuService zhihuService;
-    public BasePresenter() {
-        retrofit = ZhihuRetrofit.getRetrofit();
-        zhihuService = retrofit.create(ZhihuService.class);
-    }
+public interface BasePresenter<T extends BaseView>{
+
+    void attachView(T view);
+
+    void detachView();
 }

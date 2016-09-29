@@ -2,31 +2,33 @@ package com.example.administrator.zhihudaily.presenter;
 
 import com.example.administrator.zhihudaily.base.RxPresenter;
 import com.example.administrator.zhihudaily.net.ZhihuService;
-import com.example.administrator.zhihudaily.presenter.contract.NewsContract;
+import com.example.administrator.zhihudaily.presenter.contract.NavigationContract;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
- * Created by Administrator on 2016/9/2.
+ * Created by Administrator on 2016/8/30.
  */
 
-public class NewsPresenter extends RxPresenter<NewsContract.View> implements NewsContract.Presenter{
+public class NavigationPresenter extends RxPresenter<NavigationContract.View> implements NavigationContract.Presenter{
 
     private ZhihuService zhihuService;
 
-    public NewsPresenter(ZhihuService zhihuService){
+    public NavigationPresenter(ZhihuService zhihuService) {
         this.zhihuService = zhihuService;
     }
 
     @Override
-    public void fetchNewsResult(int id){
-        Subscription subscription = zhihuService.getNewsResult(id)
+    public void fetchMenus(){
+        Subscription subscription = zhihuService.getMenuResult().cache()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(newsResult -> mView.showStories(newsResult.getStories()),
+                .subscribe(menuResult -> mView.showMenuItems(menuResult.getOthers()),
                         error -> {});
         addSubscrebe(subscription);
     }
+
 }

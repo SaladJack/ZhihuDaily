@@ -24,4 +24,5 @@ public class ActivityModule {
     public Context context() {
         return mActivity;
     }
+
 }

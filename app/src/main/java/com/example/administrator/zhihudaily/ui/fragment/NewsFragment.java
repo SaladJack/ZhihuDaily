@@ -15,8 +15,13 @@ import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.base.BaseFragment;
 import com.example.administrator.zhihudaily.entity.MenuResult;
 import com.example.administrator.zhihudaily.entity.StoriesEntity;
-import com.example.administrator.zhihudaily.inter.NewsViewInterface;
+import com.example.administrator.zhihudaily.injector.component.ApplicationComponent;
+import com.example.administrator.zhihudaily.injector.component.DaggerNewsComponent;
+import com.example.administrator.zhihudaily.injector.component.NewsComponent;
+import com.example.administrator.zhihudaily.injector.module.ActivityModule;
+import com.example.administrator.zhihudaily.injector.module.NewsModule;
 import com.example.administrator.zhihudaily.presenter.NewsPresenter;
+import com.example.administrator.zhihudaily.presenter.contract.NewsContract;
 import com.example.administrator.zhihudaily.ui.activity.MainActivity;
 import com.example.administrator.zhihudaily.ui.adapter.HomeAdapter;
 import com.example.administrator.zhihudaily.ui.adapter.NewsAdapter;
@@ -34,32 +39,28 @@ import butterknife.Unbinder;
  * Created by Administrator on 2016/9/2.
  */
 
-public class NewsFragment extends BaseFragment implements NewsViewInterface, SwipeRefreshLayout.OnRefreshListener {
+public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsContract.View, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.rv_news)
     RecyclerView rvNews;
     @BindView(R.id.sr)
     SwipeRefreshLayout sr;
-    private Unbinder unbinder;
     private List<StoriesEntity> storiesEntityList = new ArrayList<>();
     private NewsAdapter newsAdapter;
     private MenuResult.Menu menu;
     private LinearLayoutManager llm;
-    private NewsPresenter newsPresenter;
 
 
     @Override
     protected void initData() {
         menu = (MenuResult.Menu) getArguments().getSerializable("menu");
         newsAdapter = new NewsAdapter(menu, storiesEntityList);
-        newsPresenter = new NewsPresenter(this);
-        newsPresenter.fetchNewsResult(menu.getId());
+        mPresenter.fetchNewsResult(menu.getId());
     }
 
 
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
-        unbinder = ButterKnife.bind(this, view);
         ((MainActivity)getActivity()).setTitle(menu.getName());
         llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -93,16 +94,21 @@ public class NewsFragment extends BaseFragment implements NewsViewInterface, Swi
     }
 
     @Override
-    public void onRefresh() {
-        newsPresenter.fetchNewsResult(menu.getId());
-        sr.setRefreshing(false);
+    protected void initInject() {
+        NewsComponent newsComponent = DaggerNewsComponent.builder()
+                .applicationComponent(((MainActivity) getActivity()).getApplicationComponent())
+                .activityModule(new ActivityModule(getActivity()))
+                .newsModule(new NewsModule(this))
+                .build();
+        newsComponent.inject(this);
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    public void onRefresh() {
+        mPresenter.fetchNewsResult(menu.getId());
+        sr.setRefreshing(false);
     }
+
 
     @Override
     public void refreshUI() {
@@ -118,7 +124,7 @@ public class NewsFragment extends BaseFragment implements NewsViewInterface, Swi
         theme.resolveAttribute(R.attr.windowBackground, windowBackground, true);
 
         Resources resources = getResources();
-        View window=((ViewGroup) getActivity().getWindow().getDecorView());
+        android.view.View window=((ViewGroup) getActivity().getWindow().getDecorView());
         window.setBackgroundColor(resources.getColor(windowBackground.resourceId));
         int childCount = rvNews.getChildCount();
         int firstVisible = llm.findFirstVisibleItemPosition();

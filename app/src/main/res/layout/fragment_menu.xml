@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/ll_menu"
+        android:id="@+id/ll_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryDark"
@@ -78,7 +78,7 @@
         android:textSize="18sp" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_menu"
+        android:id="@+id/rv_navigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/navdrawer_background"

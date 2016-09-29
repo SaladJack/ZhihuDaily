@@ -22,11 +22,10 @@ import com.example.administrator.zhihudaily.injector.component.DaggerHomeCompone
 import com.example.administrator.zhihudaily.injector.component.HomeComponent;
 import com.example.administrator.zhihudaily.injector.module.ActivityModule;
 import com.example.administrator.zhihudaily.injector.module.HomeModule;
-import com.example.administrator.zhihudaily.inter.HomeViewInterface;
 import com.example.administrator.zhihudaily.presenter.HomePresenter;
+import com.example.administrator.zhihudaily.presenter.contract.HomeContract;
 import com.example.administrator.zhihudaily.ui.activity.MainActivity;
 import com.example.administrator.zhihudaily.ui.adapter.HomeAdapter;
-import com.orhanobut.logger.Logger;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -43,17 +42,14 @@ import butterknife.Unbinder;
  * Created by Administrator on 2016/8/30.
  */
 
-public class HomeFragment extends BaseFragment implements HomeViewInterface, SwipeRefreshLayout.OnRefreshListener {
-    @Inject
-    HomePresenter homePresenter;
+public class HomeFragment extends BaseFragment<HomePresenter> implements HomeContract.View, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.rv_news)
     RecyclerView rvNews;
     @BindView(R.id.sr)
     SwipeRefreshLayout sr;
-
     @BindView(R.id.home_fragment_ll)
     LinearLayout homeFragmentLl;
-    private Unbinder unbinder;
+
     private List<StoriesEntity> storiesEntityList = new ArrayList<>();
     private List<LatestResult.TopStoriesEntity> topStoriesEntityList = new ArrayList<>();
     private LinearLayoutManager llm;
@@ -61,6 +57,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface, Swi
     private int pastVisiblesItems, visibleItemCount, totalItemCount;
     private boolean isLoading = false;
     private String date;
+
     static HomeFragment homeFragment;
     public static HomeFragment getInstance() {
         if (homeFragment == null)
@@ -76,20 +73,12 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface, Swi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
         return rootView;
     }
 
     @Override
-    protected void initData() {
-        injectDependences();
-        homeAdapter = new HomeAdapter(topStoriesEntityList, storiesEntityList);
-        //homePresenter = new HomePresenter(this);
-        homePresenter.fetchLatestResult();
-    }
-
-    private void injectDependences() {
-        ApplicationComponent applicationComponent = ((MainActivity) getActivity()).getApplicationComponent();
+    protected void initInject() {
+    ApplicationComponent applicationComponent = ((MainActivity) getActivity()).getApplicationComponent();
         HomeComponent dailyStoryComponent = DaggerHomeComponent.builder()
                 .applicationComponent(applicationComponent)
                 .activityModule(new ActivityModule(getActivity()))
@@ -99,8 +88,13 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface, Swi
     }
 
     @Override
+    protected void initData() {
+        homeAdapter = new HomeAdapter(topStoriesEntityList, storiesEntityList);
+        mPresenter.fetchLatestResult();
+    }
+
+    @Override
     protected void initView(View view, Bundle savedInstanceState) {
-        unbinder = ButterKnife.bind(this, view);
         llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvNews.setLayoutManager(llm);
@@ -115,8 +109,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface, Swi
                     pastVisiblesItems = llm.findFirstVisibleItemPosition();
                     if (!isLoading && (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                         isLoading = true;
-                        Logger.d("date: " + date);
-                        homePresenter.fetchBeforeStories(date);
+                        mPresenter.fetchBeforeStories(date);
                     }
                 }
             }
@@ -162,14 +155,8 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface, Swi
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-    @Override
     public void onRefresh() {
-        homePresenter.fetchLatestResult();
+        mPresenter.fetchLatestResult();
         sr.setRefreshing(false);
     }
 
@@ -187,7 +174,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInterface, Swi
         theme.resolveAttribute(R.attr.windowBackground, windowBackground, true);
 
         Resources resources = getResources();
-        View window=((ViewGroup) getActivity().getWindow().getDecorView());
+        android.view.View window=((ViewGroup) getActivity().getWindow().getDecorView());
         window.setBackgroundColor(resources.getColor(windowBackground.resourceId));
         int childCount = rvNews.getChildCount();
         int firstVisible = llm.findFirstVisibleItemPosition();

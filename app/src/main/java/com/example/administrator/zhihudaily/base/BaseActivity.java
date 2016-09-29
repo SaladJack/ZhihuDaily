@@ -1,17 +1,23 @@
 package com.example.administrator.zhihudaily.base;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+
+import javax.inject.Inject;
+
+import butterknife.ButterKnife;
 
 
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
 
     //布局文件ID
     protected abstract int getContentViewId();
-
     //布局中Fragment的ID
     protected abstract int getFragmentContentId();
+
 
     //添加fragment
     protected void addFragment(BaseFragment fragment) {
