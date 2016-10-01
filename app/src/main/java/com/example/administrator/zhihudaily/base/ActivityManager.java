@@ -29,7 +29,7 @@ public class ActivityManager {
      * 获取当前Activity
      */
     public Activity currentActivity(){
-        Activity activity=activityStack.lastElement();
+        Activity activity  =activityStack.lastElement();
         return activity;
     }
     /**

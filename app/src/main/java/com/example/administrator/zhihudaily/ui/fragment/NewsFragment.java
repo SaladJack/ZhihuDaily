@@ -13,9 +13,8 @@ import android.widget.TextView;
 
 import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.base.BaseFragment;
-import com.example.administrator.zhihudaily.entity.MenuResult;
-import com.example.administrator.zhihudaily.entity.StoriesEntity;
-import com.example.administrator.zhihudaily.injector.component.ApplicationComponent;
+import com.example.administrator.zhihudaily.model.MenuResult;
+import com.example.administrator.zhihudaily.model.StoriesEntity;
 import com.example.administrator.zhihudaily.injector.component.DaggerNewsComponent;
 import com.example.administrator.zhihudaily.injector.component.NewsComponent;
 import com.example.administrator.zhihudaily.injector.module.ActivityModule;
@@ -33,7 +32,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by Administrator on 2016/9/2.

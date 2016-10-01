@@ -13,8 +13,7 @@ import android.widget.TextView;
 
 import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.base.BaseFragment;
-import com.example.administrator.zhihudaily.entity.MenuResult;
-import com.example.administrator.zhihudaily.injector.component.ApplicationComponent;
+import com.example.administrator.zhihudaily.model.MenuResult;
 import com.example.administrator.zhihudaily.injector.component.DaggerNavigationComponent;
 import com.example.administrator.zhihudaily.injector.component.NavigationComponent;
 import com.example.administrator.zhihudaily.injector.module.ActivityModule;
@@ -28,8 +27,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

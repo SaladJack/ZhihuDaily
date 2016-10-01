@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.base.BaseFragment;
-import com.example.administrator.zhihudaily.entity.MenuResult;
+import com.example.administrator.zhihudaily.model.MenuResult;
 import com.example.administrator.zhihudaily.ui.activity.MainActivity;
 import com.example.administrator.zhihudaily.ui.fragment.NewsFragment;
 

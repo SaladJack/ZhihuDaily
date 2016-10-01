@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.zhihudaily.R;
-import com.example.administrator.zhihudaily.entity.MenuResult;
-import com.example.administrator.zhihudaily.entity.StoriesEntity;
+import com.example.administrator.zhihudaily.model.MenuResult;
+import com.example.administrator.zhihudaily.model.StoriesEntity;
 import com.example.administrator.zhihudaily.ui.activity.MainActivity;
 import com.example.administrator.zhihudaily.ui.activity.StoryDetailActivity;
 

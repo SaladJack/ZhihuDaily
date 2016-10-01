@@ -7,7 +7,6 @@ import com.example.administrator.zhihudaily.injector.component.ApplicationCompon
 import com.example.administrator.zhihudaily.injector.component.DaggerApplicationComponent;
 import com.example.administrator.zhihudaily.injector.module.ApplicationModule;
 import com.example.administrator.zhihudaily.injector.module.NetWorkModule;
-import com.squareup.leakcanary.LeakCanary;
 
 
 /**
@@ -22,7 +21,6 @@ public class DailyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
-        LeakCanary.install(this);
         setupInjector();
     }
 

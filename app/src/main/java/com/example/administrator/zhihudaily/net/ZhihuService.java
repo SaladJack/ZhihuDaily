@@ -2,11 +2,11 @@ package com.example.administrator.zhihudaily.net;
 
 
 
-import com.example.administrator.zhihudaily.entity.BeforeResult;
-import com.example.administrator.zhihudaily.entity.DetailResult;
-import com.example.administrator.zhihudaily.entity.LatestResult;
-import com.example.administrator.zhihudaily.entity.MenuResult;
-import com.example.administrator.zhihudaily.entity.NewsResult;
+import com.example.administrator.zhihudaily.model.BeforeResult;
+import com.example.administrator.zhihudaily.model.DetailResult;
+import com.example.administrator.zhihudaily.model.LatestResult;
+import com.example.administrator.zhihudaily.model.MenuResult;
+import com.example.administrator.zhihudaily.model.NewsResult;
 
 
 import retrofit2.http.GET;

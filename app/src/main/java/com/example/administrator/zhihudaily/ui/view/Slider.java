@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.zhihudaily.R;
-import com.example.administrator.zhihudaily.entity.LatestResult;
+import com.example.administrator.zhihudaily.model.LatestResult;
 
 import java.util.ArrayList;
 import java.util.List;

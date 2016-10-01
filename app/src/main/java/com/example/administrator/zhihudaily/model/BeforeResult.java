@@ -1,4 +1,4 @@
-package com.example.administrator.zhihudaily.entity;
+package com.example.administrator.zhihudaily.model;
 
 import java.util.List;
 

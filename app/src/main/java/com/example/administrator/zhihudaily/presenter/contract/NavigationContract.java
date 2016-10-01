@@ -2,7 +2,7 @@ package com.example.administrator.zhihudaily.presenter.contract;
 
 import com.example.administrator.zhihudaily.base.BasePresenter;
 import com.example.administrator.zhihudaily.base.BaseView;
-import com.example.administrator.zhihudaily.entity.MenuResult;
+import com.example.administrator.zhihudaily.model.MenuResult;
 
 import java.util.List;
 
