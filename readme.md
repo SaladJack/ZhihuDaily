@@ -21,6 +21,7 @@
 - [RxJava](https://github.com/ReactiveX/RxJava)- [RxAndroid](https://github.com/ReactiveX/RxAndroid)- [Retrofit2](https://github.com/square/retrofit)
 - [OkHttp3](https://github.com/square/okhttp)
 - [Dagger2](https://github.com/google/dagger)- [Butter Knife](https://github.com/JakeWharton/butterknife)
+- [GSON](https://github.com/google/gson)
 
 ##TODO
 - 完善推送功能
