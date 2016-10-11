@@ -14,13 +14,11 @@ import com.example.administrator.zhihudaily.injector.module.NetWorkModule;
  */
 
 public class DailyApplication extends Application {
-    private static Context mContext;
     private ApplicationComponent mApplicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext = this;
         setupInjector();
     }
 
@@ -31,9 +29,7 @@ public class DailyApplication extends Application {
                 .build();
     }
 
-    public static Context getContext(){
-        return mContext;
-    }
+
 
     public ApplicationComponent getApplicationComponent(){
         return mApplicationComponent;

@@ -22,21 +22,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ZhihuRetrofit {
     private static Retrofit retrofit;
-    public static Retrofit getRetrofit(){
+    public static Retrofit getRetrofit(DailyApplication context){
         if (retrofit == null) {
             synchronized (ZhihuRetrofit.class) {
                 if (retrofit == null) {
-                    File cacheFile = new File(DailyApplication.getContext().getExternalCacheDir(),"ZhihuDaily");
+                    File cacheFile = new File(context.getApplicationContext().getExternalCacheDir(),"ZhihuDaily");
                     Cache cache = new Cache(cacheFile,1024*1024*50);
                     Interceptor interceptor = chain -> {
                             Request request = chain.request();
-                            if (!NetworkUtils.isConnected(DailyApplication.getContext())) {
+                            if (!NetworkUtils.isConnected(context.getApplicationContext())) {
                                 request = request.newBuilder()
                                         .cacheControl(CacheControl.FORCE_CACHE)
                                         .build();
                             }
                             Response response = chain.proceed(request);
-                            if (NetworkUtils.isConnected(DailyApplication.getContext())) {
+                            if (NetworkUtils.isConnected(context.getApplicationContext())) {
                                 int maxAge = 0;
                                 //有网络时,设置缓存超时时间0个小时
                                 response.newBuilder()

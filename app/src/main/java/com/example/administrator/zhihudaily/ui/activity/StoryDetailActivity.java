@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.administrator.zhihudaily.R;
 import com.example.administrator.zhihudaily.app.DailyApplication;
 import com.example.administrator.zhihudaily.injector.component.DaggerStoryDetailComponent;
@@ -99,6 +100,8 @@ public class StoryDetailActivity extends AppCompatActivity implements StoryDetai
     public void showTitlePage(String url) {
         Glide.with(this)
                 .load(url)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(backdrop);
     }
 

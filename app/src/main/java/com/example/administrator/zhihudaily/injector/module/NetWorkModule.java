@@ -1,5 +1,7 @@
 package com.example.administrator.zhihudaily.injector.module;
 
+import android.content.Context;
+
 import com.example.administrator.zhihudaily.app.DailyApplication;
 import com.example.administrator.zhihudaily.injector.scope.PerApplication;
 import com.example.administrator.zhihudaily.net.ZhihuRetrofit;
@@ -28,7 +30,7 @@ public class NetWorkModule {
 
     @Provides
     @PerApplication
-    public Retrofit provideRetrofit(){
-        return ZhihuRetrofit.getRetrofit();
+    public Retrofit provideRetrofit(DailyApplication context){
+        return ZhihuRetrofit.getRetrofit(context);
     }
 }
